@@ -16,7 +16,6 @@ export default function RestaurantCard({
   score,
   description,
   tags,
-  id,
 }: Restaurant) {
   return (
     <Card>
@@ -30,7 +29,7 @@ export default function RestaurantCard({
           </Score>
         </TitleContainer>
         <p>{description}</p>
-        <LinkButton to={`/${id}`}>Saiba mais</LinkButton>
+        <LinkButton to={`/1234`}>Saiba mais</LinkButton>
         <TagContainer>
           {tags.map((tag) => (
             <Tag key={tag}>{tag}</Tag>
