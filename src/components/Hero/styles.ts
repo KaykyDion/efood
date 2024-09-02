@@ -16,5 +16,10 @@ export const HeroContainer = styled.header`
     font-weight: 900;
     line-height: 42px;
     font-size: 36px;
+
+    @media (max-width: 320px) {
+      font-size: 32px;
+      line-height: 36px;
+    }
   }
 `;

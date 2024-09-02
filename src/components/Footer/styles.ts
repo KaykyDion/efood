@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../styles";
 
 export const FooterContainer = styled.footer`
-  background-color: ${colors.footerBackground};
+  background-color: ${colors.textSecondary};
   padding: 40px 20px;
   text-align: center;
   display: flex;

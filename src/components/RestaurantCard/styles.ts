@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../../styles";
+import { Link } from "react-router-dom";
 
 export const Card = styled.li`
   max-width: 472px;
@@ -50,7 +51,7 @@ export const TitleContainer = styled.div`
   align-items: center;
 `;
 
-export const LinkButton = styled.a`
+export const LinkButton = styled(Link)`
   background-color: ${colors.textPrimary};
   color: ${colors.background};
   font-size: 14px;

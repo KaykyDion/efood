@@ -16,7 +16,8 @@ export default function RestaurantContainer({ restaurantList }: Props) {
           score={r.score}
           tags={r.tags}
           title={r.title}
-          key={r.title}
+          id={r.id}
+          key={r.id}
         />
       ))}
     </Container>

@@ -1,9 +1,9 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 export const colors = {
   textPrimary: "#E66767",
   background: "#FFF8F2",
-  footerBackground: "#FFEBD9",
+  textSecondary: "#FFEBD9",
   white: "#FFF",
 };
 
@@ -14,6 +14,7 @@ export const GlobalCss = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     list-style: none;
+    text-decoration: none;
   }
 
   body {
@@ -29,4 +30,15 @@ export const GlobalCss = createGlobalStyle`
       width: 90%;
     }
   }
+`;
+
+export const Button = styled.button`
+  background-color: ${colors.textSecondary};
+  color: ${colors.textPrimary};
+  border: none;
+  padding: 4px 0;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
 `;
