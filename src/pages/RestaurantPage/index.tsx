@@ -1,55 +1,37 @@
 import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import hiokiSushi from "../../assets/images/hioki-sushi.png";
-import productImg from "../../assets/images/product.png";
 import ProductsContainer from "../../containers/ProductsContainer";
-import Product from "../../models/Product";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Restaurant from "../../models/Restaurant";
 
 export default function RestaurantPage() {
-  const products = [
-    new Product(
-      "Pizza Marguerita",
-      productImg,
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-      1234
-    ),
-    new Product(
-      "Pizza Marguerita",
-      productImg,
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-      1235
-    ),
-    new Product(
-      "Pizza Marguerita",
-      productImg,
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-      1236
-    ),
-    new Product(
-      "Pizza Marguerita",
-      productImg,
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-      1237
-    ),
-    new Product(
-      "Pizza Marguerita",
-      productImg,
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-      1238
-    ),
-    new Product(
-      "Pizza Marguerita",
-      productImg,
-      "A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!",
-      1239
-    ),
-  ];
+  const [restaurant, setRestaurant] = useState<Restaurant>();
+  const { restaurantId } = useParams();
+
+  useEffect(() => {
+    fetch(
+      `https://fake-api-tau.vercel.app/api/efood/restaurantes/${restaurantId}`
+    )
+      .then((res) => res.json())
+      .then((res) => setRestaurant(res));
+  }, [restaurantId]);
   return (
     <>
       <Header />
-      <Banner region="Japonesa" title="Hioki Sushi" bannerImg={hiokiSushi} />
-      <ProductsContainer products={products} />
+      {restaurant && (
+        <main>
+          <Banner
+            type={restaurant.tipo}
+            title={restaurant.titulo}
+            bannerImg={restaurant.capa}
+          />
+          {restaurant.cardapio && (
+            <ProductsContainer products={restaurant.cardapio} />
+          )}
+        </main>
+      )}
       <Footer />
     </>
   );

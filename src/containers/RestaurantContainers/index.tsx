@@ -11,12 +11,13 @@ export default function RestaurantContainer({ restaurantList }: Props) {
     <Container>
       {restaurantList.map((r) => (
         <RestaurantCard
-          img={r.img}
-          description={r.description}
-          score={r.score}
-          tags={r.tags}
-          title={r.title}
           id={r.id}
+          capa={r.capa}
+          avaliacao={r.avaliacao}
+          descricao={r.descricao}
+          destacado={r.destacado}
+          titulo={r.titulo}
+          tipo={r.tipo}
           key={r.id}
         />
       ))}

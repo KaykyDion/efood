@@ -12,8 +12,8 @@ export default function ProductCard({ productImg, title, description }: Props) {
     <Card>
       <img src={productImg} alt={title} />
       <h3>{title}</h3>
-      <p>{description}</p>
-      <Button>Adicionar ao carrinho</Button>
+      <p>{description.length > 132 && description.slice(0, 129) + "..."}</p>
+      <Button>Mais detalhes</Button>
     </Card>
   );
 }

@@ -23,6 +23,8 @@ export const Card = styled.li`
 
   img {
     width: 100%;
+    height: 216px;
+    object-fit: cover;
   }
 `;
 

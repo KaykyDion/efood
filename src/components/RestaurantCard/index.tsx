@@ -11,29 +11,30 @@ import {
 } from "./styles";
 
 export default function RestaurantCard({
-  img,
-  title,
-  score,
-  description,
-  tags,
+  titulo,
+  avaliacao,
+  capa,
+  descricao,
+  destacado,
+  tipo,
+  id,
 }: Restaurant) {
   return (
     <Card>
-      <img src={img} alt={title} />
+      <img src={capa} alt={titulo} />
       <InfosContainer>
         <TitleContainer>
-          <h3>{title}</h3>
+          <h3>{titulo}</h3>
           <Score>
-            {score}
+            {avaliacao}
             <img src={star} alt="avaliação" />
           </Score>
         </TitleContainer>
-        <p>{description}</p>
-        <LinkButton to={`/1234`}>Saiba mais</LinkButton>
+        <p>{descricao}</p>
+        <LinkButton to={`/restaurant/${id}`}>Saiba mais</LinkButton>
         <TagContainer>
-          {tags.map((tag) => (
-            <Tag key={tag}>{tag}</Tag>
-          ))}
+          {destacado && <Tag>Destaque da semana</Tag>}
+          <Tag>{tipo}</Tag>
         </TagContainer>
       </InfosContainer>
     </Card>

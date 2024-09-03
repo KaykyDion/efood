@@ -11,9 +11,9 @@ export default function ProductsContainer({ products }: Props) {
     <Container className="container">
       {products.map((p) => (
         <ProductCard
-          description={p.description}
-          productImg={p.img}
-          title={p.title}
+          description={p.descricao}
+          productImg={p.foto}
+          title={p.nome}
           key={p.id}
         />
       ))}

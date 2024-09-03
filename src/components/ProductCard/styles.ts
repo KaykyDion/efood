@@ -12,6 +12,8 @@ export const Card = styled.li`
 
   img {
     width: 100%;
+    height: 168px;
+    object-fit: cover;
   }
 
   h3 {
@@ -22,5 +24,6 @@ export const Card = styled.li`
   p {
     font-size: 14px;
     line-height: 22px;
+    max-width: 90%;
   }
 `;
