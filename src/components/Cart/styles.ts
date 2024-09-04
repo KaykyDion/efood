@@ -61,6 +61,10 @@ export const SideBar = styled.aside`
   max-width: 360px;
   width: 100%;
 
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+
   > p {
     display: flex;
     justify-content: space-between;

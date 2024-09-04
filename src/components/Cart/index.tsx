@@ -6,6 +6,7 @@ import { RootReducer } from "../../store";
 import formatPrice from "../../utils/formatPrice";
 import Product from "../../models/Product";
 import hiddenBodyScroll from "../../utils/hiddenOverflow";
+import generateRandomKey from "../../utils/generateRandomKey";
 
 export default function Cart() {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart);
@@ -30,7 +31,7 @@ export default function Cart() {
       <SideBar>
         <ul>
           {items.map((item) => (
-            <CartItem key={item.id}>
+            <CartItem key={generateRandomKey()}>
               <img src={item.foto} />
               <div>
                 <h3>{item.nome}</h3>
