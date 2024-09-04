@@ -3,47 +3,56 @@ import { Button } from "../../styles";
 import Modal from "../Modal";
 import { AddToCartButton, Card, Infos } from "./styles";
 import formatPrice from "../../utils/formatPrice";
-
-type Props = {
-  productImg: string;
-  title: string;
-  description: string;
-  portion: string;
-  price: number;
-};
+import { add, open } from "../../store/reducers/cart";
+import Product from "../../models/Product";
+import { useDispatch } from "react-redux";
+import hiddenBodyScroll from "../../utils/hiddenOverflow";
 
 export default function ProductCard({
-  productImg,
-  title,
-  description,
-  portion,
-  price,
-}: Props) {
+  foto,
+  nome,
+  descricao,
+  porcao,
+  preco,
+  id,
+}: Product) {
   const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const addtoCart = (product: Product) => {
+    dispatch(add(product));
+    dispatch(open());
+  };
 
   const closeModal = () => {
     setModalOpen(false);
   };
 
+  hiddenBodyScroll(modalOpen);
+
   return (
     <>
       <Card>
-        <img src={productImg} alt={title} />
-        <h3>{title}</h3>
-        <p>{description.length > 132 && description.slice(0, 129) + "..."}</p>
+        <img src={foto} alt={nome} />
+        <h3>{nome}</h3>
+        <p>{descricao.length > 132 && descricao.slice(0, 129) + "..."}</p>
         <Button onClick={() => setModalOpen(true)}>Mais detalhes</Button>
       </Card>
       <Modal closeModal={closeModal} modalState={modalOpen}>
         <Infos>
-          <img src={productImg} alt={title} />
+          <img src={foto} alt={nome} />
           <div>
-            <h3>{title}</h3>
+            <h3>{nome}</h3>
             <p>
-              {description} <br />
-              <br /> Serve de: {portion}
+              {descricao} <br />
+              <br /> Serve de: {porcao}
             </p>
-            <AddToCartButton>
-              Adicionar ao carrinho - {formatPrice(price)}
+            <AddToCartButton
+              onClick={() =>
+                addtoCart({ nome, descricao, foto, id, porcao, preco })
+              }
+            >
+              Adicionar ao carrinho - {formatPrice(preco)}
             </AddToCartButton>
           </div>
         </Infos>

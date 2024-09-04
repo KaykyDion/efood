@@ -22,4 +22,5 @@ export const HeaderContainer = styled.header`
 export const CartButton = styled.button`
   border: none;
   background: none;
+  cursor: pointer;
 `;
