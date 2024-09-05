@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button, colors } from "../../styles";
+import { breakpoints, Button, colors } from "../../styles";
 
 export const Card = styled.li`
   max-width: 320px;
@@ -37,7 +37,7 @@ export const Infos = styled.div`
   gap: 24px;
   color: ${colors.white};
 
-  @media (max-width: 820px) {
+  @media (max-width: ${breakpoints.tabletLg}) {
     flex-direction: column;
   }
 
@@ -51,11 +51,11 @@ export const Infos = styled.div`
     width: 280px;
     object-fit: cover;
 
-    @media (max-width: 820px) {
+    @media (max-width: ${breakpoints.tabletLg}) {
       width: 100%;
     }
 
-    @media (max-width: 320px) {
+    @media (max-width: ${breakpoints.mobile}) {
       display: none;
     }
   }

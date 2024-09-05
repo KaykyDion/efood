@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 export const HeroContainer = styled.header`
   padding: 40px 0;
@@ -17,7 +17,7 @@ export const HeroContainer = styled.header`
     line-height: 42px;
     font-size: 36px;
 
-    @media (max-width: 320px) {
+    @media (max-width: ${breakpoints.mobile}) {
       font-size: 32px;
       line-height: 36px;
     }

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 export const HeaderContainer = styled.header`
   padding: 64px 0;
@@ -13,7 +13,7 @@ export const HeaderContainer = styled.header`
     font-size: 18px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column;
     gap: 32px;
   }

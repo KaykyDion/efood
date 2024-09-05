@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 import removeIcon from "../../assets/images/remove-icon.svg";
 
 export const CartContainer = styled.div`
@@ -61,7 +61,7 @@ export const SideBar = styled.aside`
   max-width: 360px;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${breakpoints.tablet}) {
     width: 80%;
   }
 
