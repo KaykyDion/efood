@@ -60,6 +60,19 @@ export const SideBar = styled.aside`
   padding: 32px 8px 0 8px;
   max-width: 360px;
   width: 100%;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  animation: open 0.3s forwards;
+
+  @keyframes open {
+    from {
+      right: -200px;
+    }
+    to {
+      right: 0;
+    }
+  }
 
   @media (max-width: ${breakpoints.tablet}) {
     width: 80%;
@@ -88,4 +101,11 @@ export const OverLay = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
+`;
+
+export const EmptyCartMessage = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -22,6 +22,7 @@ export default function ProductCard({
   const addtoCart = (product: Product) => {
     dispatch(add(product));
     dispatch(open());
+    closeModal();
   };
 
   const closeModal = () => {
