@@ -5,6 +5,7 @@ export const colors = {
   background: "#FFF8F2",
   textSecondary: "#FFEBD9",
   white: "#FFF",
+  black: "#4B4B4B",
 };
 
 export const breakpoints = {
@@ -48,4 +49,25 @@ export const Button = styled.button`
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
+`;
+
+export const InputRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+`;
+
+export const FormContainer = styled.div`
+  h2 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  button {
+    margin-top: 8px;
+  }
+
+  form {
+    margin-bottom: 16px;
+  }
 `;
