@@ -6,11 +6,16 @@ export default function DeliveryForm() {
     <FormContainer>
       <h2>Entrega</h2>
       <form>
-        <InputGroup type="text" id="reciver" labelText="Quem irá receber" />
+        <InputGroup type="text" id="name" labelText="Quem irá receber" />
         <InputGroup type="text" id="address" labelText="Endereço" />
         <InputGroup type="text" id="city" labelText="Cidade" />
         <InputRow>
-          <InputGroup type="text" id="zipCode" labelText="CEP" />
+          <InputGroup
+            type="text"
+            id="zipCode"
+            labelText="CEP"
+            mask="99999-999"
+          />
           <InputGroup type="text" id="number" labelText="Número" />
         </InputRow>
         <InputGroup type="text" id="complement" labelText="Complemento" />

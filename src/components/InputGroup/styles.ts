@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { colors } from "../../styles";
 import { Props } from ".";
 
-export const Container = styled.div<Omit<Props, "labelText" | "type" | "id">>`
+export const Container = styled.div<
+  Omit<Props, "labelText" | "type" | "id" | "mask">
+>`
   display: flex;
   flex-direction: column;
   gap: 8px;
