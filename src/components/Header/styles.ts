@@ -13,6 +13,10 @@ export const HeaderContainer = styled.header`
     font-size: 18px;
   }
 
+  h1 {
+    line-height: 0;
+  }
+
   @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column;
     gap: 32px;

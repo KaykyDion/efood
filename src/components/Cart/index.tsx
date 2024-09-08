@@ -5,7 +5,7 @@ import { close } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
 import hiddenBodyScroll from "../../utils/hiddenOverflow";
 
-import { CartContainer, OverLay, SideBar } from "./styles";
+import * as S from "./styles";
 import CartItems from "../../containers/CartItems";
 import Checkout from "../Checkout";
 
@@ -21,15 +21,15 @@ export default function Cart() {
   hiddenBodyScroll(isOpen);
 
   return (
-    <CartContainer className={isOpen ? "is-open" : ""}>
-      <SideBar>
+    <S.CartContainer className={isOpen ? "is-open" : ""}>
+      <S.SideBar>
         {!finishedCart ? (
           <CartItems goToAddressEdit={() => setFinishedCart(true)} />
         ) : (
           <Checkout backToCart={() => setFinishedCart(false)} />
         )}
-      </SideBar>
-      <OverLay onClick={closeCart}></OverLay>
-    </CartContainer>
+      </S.SideBar>
+      <S.OverLay onClick={closeCart}></S.OverLay>
+    </S.CartContainer>
   );
 }

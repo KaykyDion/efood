@@ -11,6 +11,10 @@ export const HeroContainer = styled.header`
   margin-bottom: 80px;
 
   h1 {
+    line-height: 0;
+  }
+
+  h2 {
     margin-top: 136px;
     max-width: 540px;
     font-weight: 900;

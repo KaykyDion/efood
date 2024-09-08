@@ -1,16 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type Delivery = {
-  reciver: string;
-  address: {
-    description: string;
-    city: string;
-    zipCode: string;
-    number: number | "";
-    complement: string;
-  };
-};
-
 type DeliveryState = {
   delivery: Delivery;
 };

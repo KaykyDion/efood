@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import heroBackground from "../../assets/images/hero-background.svg";
 import logoEfood from "../../assets/images/logo-efood.svg";
-import { CartButton, HeaderContainer } from "./styles";
-import { useDispatch, useSelector } from "react-redux";
+
 import { open } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
+
+import * as S from "./styles";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -16,13 +19,22 @@ export default function Header() {
 
   return (
     <header style={{ backgroundImage: `url(${heroBackground})` }}>
-      <HeaderContainer className="container">
-        <Link to="/">Restaurantes</Link>
-        <img src={logoEfood} alt="efood" />
-        <CartButton onClick={openCart}>
+      <S.HeaderContainer className="container">
+        <Link title="Clique aqui para ir para os restaurantes" to="/">
+          Restaurantes
+        </Link>
+        <h1 title="efood">
+          <Link to="/">
+            <img src={logoEfood} alt="efood" />
+          </Link>
+        </h1>
+        <S.CartButton
+          title="Clique aqui para abrir o carrinho"
+          onClick={openCart}
+        >
           {items.length} produto(s) no carrinho
-        </CartButton>
-      </HeaderContainer>
+        </S.CartButton>
+      </S.HeaderContainer>
     </header>
   );
 }

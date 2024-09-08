@@ -1,14 +1,5 @@
 import star from "../../assets/images/star_favorite.svg";
-import Restaurant from "../../models/Restaurant";
-import {
-  Card,
-  InfosContainer,
-  LinkButton,
-  Score,
-  Tag,
-  TagContainer,
-  TitleContainer,
-} from "./styles";
+import * as S from "./styles";
 
 export default function RestaurantCard({
   titulo,
@@ -20,23 +11,28 @@ export default function RestaurantCard({
   id,
 }: Restaurant) {
   return (
-    <Card>
+    <S.Card>
       <img src={capa} alt={titulo} />
-      <InfosContainer>
-        <TitleContainer>
+      <S.InfosContainer>
+        <S.TitleContainer>
           <h3>{titulo}</h3>
-          <Score>
+          <S.Score>
             {avaliacao}
             <img src={star} alt="avaliação" />
-          </Score>
-        </TitleContainer>
+          </S.Score>
+        </S.TitleContainer>
         <p>{descricao}</p>
-        <LinkButton to={`/restaurant/${id}`}>Saiba mais</LinkButton>
-        <TagContainer>
-          {destacado && <Tag>Destaque da semana</Tag>}
-          <Tag>{tipo}</Tag>
-        </TagContainer>
-      </InfosContainer>
-    </Card>
+        <S.LinkButton
+          title={`Clique para saber mais sobre: ${titulo}`}
+          to={`/restaurant/${id}`}
+        >
+          Saiba mais
+        </S.LinkButton>
+        <S.TagContainer>
+          {destacado && <S.Tag>Destaque da semana</S.Tag>}
+          <S.Tag>{tipo}</S.Tag>
+        </S.TagContainer>
+      </S.InfosContainer>
+    </S.Card>
   );
 }

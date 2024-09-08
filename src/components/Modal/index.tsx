@@ -1,5 +1,6 @@
 import closeIcon from "../../assets/images/close-icon.svg";
-import { CloseBtn, ModalContainer, ModalContent } from "./styles";
+
+import * as S from "./styles";
 
 type Props = {
   children: JSX.Element;
@@ -9,14 +10,14 @@ type Props = {
 
 export default function Modal({ children, modalState, closeModal }: Props) {
   return (
-    <ModalContainer className={modalState ? "is-open" : ""}>
-      <ModalContent className="container">
+    <S.ModalContainer className={modalState ? "is-open" : ""}>
+      <S.ModalContent className="container">
         {children}
-        <CloseBtn onClick={closeModal}>
+        <S.CloseBtn onClick={closeModal}>
           <img src={closeIcon} alt="Clique para fechar" />
-        </CloseBtn>
-      </ModalContent>
+        </S.CloseBtn>
+      </S.ModalContent>
       <div onClick={closeModal} className="overlay"></div>
-    </ModalContainer>
+    </S.ModalContainer>
   );
 }

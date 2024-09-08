@@ -1,4 +1,3 @@
-import Product from "../models/Product";
 import formatPrice from "./formatPrice";
 
 export function getTotalPrice(items: Product[]) {

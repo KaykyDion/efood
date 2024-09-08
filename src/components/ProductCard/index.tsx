@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Button } from "../../styles";
-import Modal from "../Modal";
-import { AddToCartButton, Card, Infos } from "./styles";
+
 import formatPrice from "../../utils/formatPrice";
 import { add, open } from "../../store/reducers/cart";
-import Product from "../../models/Product";
 import { useDispatch } from "react-redux";
 import hiddenBodyScroll from "../../utils/hiddenOverflow";
+
+import { Button } from "../../styles";
+import Modal from "../Modal";
+import * as S from "./styles";
 
 export default function ProductCard({
   foto,
@@ -33,14 +34,19 @@ export default function ProductCard({
 
   return (
     <>
-      <Card>
+      <S.Card>
         <img src={foto} alt={nome} />
         <h3>{nome}</h3>
         <p>{descricao.length > 132 && descricao.slice(0, 129) + "..."}</p>
-        <Button onClick={() => setModalOpen(true)}>Mais detalhes</Button>
-      </Card>
+        <Button
+          title={`Clique para mais detalhes do prato: ${nome}`}
+          onClick={() => setModalOpen(true)}
+        >
+          Mais detalhes
+        </Button>
+      </S.Card>
       <Modal closeModal={closeModal} modalState={modalOpen}>
-        <Infos>
+        <S.Infos>
           <img src={foto} alt={nome} />
           <div>
             <h3>{nome}</h3>
@@ -48,15 +54,15 @@ export default function ProductCard({
               {descricao} <br />
               <br /> Serve de: {porcao}
             </p>
-            <AddToCartButton
+            <S.AddToCartButton
               onClick={() =>
                 addtoCart({ nome, descricao, foto, id, porcao, preco })
               }
             >
               Adicionar ao carrinho - {formatPrice(preco)}
-            </AddToCartButton>
+            </S.AddToCartButton>
           </div>
-        </Infos>
+        </S.Infos>
       </Modal>
     </>
   );

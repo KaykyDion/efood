@@ -6,10 +6,10 @@ import { RootReducer } from "../../store";
 import { clear, close } from "../../store/reducers/cart";
 import { getTotalPrice } from "../../utils/getTotalPrice";
 
-import { Button, FormContainer, InputRow } from "../../styles";
 import InputGroup from "../InputGroup";
 import { usePurchaseMutation } from "../../services/api";
 import { SuccessMessage } from "./styles";
+import { Button, FormContainer, InputRow } from "../../styles";
 
 type Props = {
   backToAddressEdit: () => void;
@@ -102,7 +102,6 @@ export default function PaymentForm({ backToAddressEdit, backToCart }: Props) {
             backToCart();
             dispatch(close());
           }}
-          title="Clique aqui para concluir o pedido"
         >
           Concluir
         </Button>
@@ -169,18 +168,10 @@ export default function PaymentForm({ backToAddressEdit, backToCart }: Props) {
           />
         </InputRow>
 
-        <Button
-          disabled={isLoading}
-          title="Clique para finalizar o pagamento"
-          type="submit"
-        >
+        <Button disabled={isLoading} type="submit">
           {isLoading ? "Finalizando pagamento..." : "Finalizar pagamento"}
         </Button>
-        <Button
-          onClick={backToAddressEdit}
-          title="Clique para voltar a edição de endereço"
-          type="button"
-        >
+        <Button onClick={backToAddressEdit} type="button">
           Voltar para a edição de endereço
         </Button>
       </form>

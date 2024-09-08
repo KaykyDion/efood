@@ -2,13 +2,14 @@ import logoEfood from "../../assets/images/logo-efood.svg";
 import logoInstagram from "../../assets/images/logo-instagram.svg";
 import logoFacebook from "../../assets/images/logo-facebook.svg";
 import logoTwitter from "../../assets/images/logo-twitter.svg";
-import { FooterContainer, SocialLinks } from "./styles";
+
+import * as S from "./styles";
 
 export default function Footer() {
   return (
-    <FooterContainer>
+    <S.FooterContainer>
       <img src={logoEfood} alt="efood" />
-      <SocialLinks>
+      <S.SocialLinks>
         <li>
           <a href="#">
             <img src={logoInstagram} alt="Instagram" />
@@ -24,12 +25,12 @@ export default function Footer() {
             <img src={logoTwitter} alt="Twitter" />
           </a>
         </li>
-      </SocialLinks>
+      </S.SocialLinks>
       <p>
         A efood é uma plataforma para divulgação de estabelecimentos, a
         responsabilidade pela entrega, qualidade dos produtos é toda do
         estabelecimento contratado.
       </p>
-    </FooterContainer>
+    </S.FooterContainer>
   );
 }

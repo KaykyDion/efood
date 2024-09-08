@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { Button, FormContainer, InputRow } from "../../styles";
-import InputGroup from "../InputGroup";
 import { setDelivery } from "../../store/reducers/delivery";
 import { RootReducer } from "../../store";
+
+import * as S from "../../styles";
+import InputGroup from "../InputGroup";
 
 type Props = {
   backtoCart: () => void;
@@ -69,7 +70,7 @@ export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
   };
 
   return (
-    <FormContainer>
+    <S.FormContainer>
       <h2>Entrega</h2>
       <form onSubmit={form.handleSubmit}>
         <InputGroup
@@ -99,7 +100,7 @@ export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
           $isInvalid={getError("city")}
           labelText="Cidade"
         />
-        <InputRow>
+        <S.InputRow>
           <InputGroup
             onChange={form.handleChange}
             value={form.values.zipCode}
@@ -119,7 +120,7 @@ export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
             $isInvalid={getError("number")}
             labelText="Número"
           />
-        </InputRow>
+        </S.InputRow>
         <InputGroup
           onChange={form.handleChange}
           value={form.values.complement}
@@ -129,17 +130,11 @@ export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
           $isInvalid={getError("complement")}
           labelText="Complemento"
         />
-        <Button title="Clique para continuar com o pagamento" type="submit">
-          Continuar com o pagamento
-        </Button>
-        <Button
-          onClick={backtoCart}
-          title="Clique para voltar para o carrinho"
-          type="button"
-        >
+        <S.Button type="submit">Continuar com o pagamento</S.Button>
+        <S.Button onClick={backtoCart} type="button">
           Voltar para o carrinho
-        </Button>
+        </S.Button>
       </form>
-    </FormContainer>
+    </S.FormContainer>
   );
 }

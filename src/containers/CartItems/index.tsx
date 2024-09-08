@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import { RootReducer } from "../../store";
-import { CartItem, EmptyCartMessage } from "./styles";
 import generateRandomKey from "../../utils/generateRandomKey";
 import formatPrice from "../../utils/formatPrice";
 import { remove } from "../../store/reducers/cart";
-import Product from "../../models/Product";
-import { Button } from "../../styles";
 import { getTotalPrice } from "../../utils/getTotalPrice";
+
+import * as S from "./styles";
+import { Button } from "../../styles";
 
 type Props = {
   goToAddressEdit: () => void;
@@ -25,14 +26,14 @@ export default function CartItems({ goToAddressEdit }: Props) {
       <>
         <ul>
           {items.map((item) => (
-            <CartItem key={generateRandomKey()}>
+            <S.CartItem key={generateRandomKey()}>
               <img src={item.foto} />
               <div>
                 <h3>{item.nome}</h3>
                 <span>{formatPrice(item.preco)}</span>
               </div>
               <button onClick={() => removeProduct(item)} />
-            </CartItem>
+            </S.CartItem>
           ))}
         </ul>
         <p>
@@ -43,8 +44,8 @@ export default function CartItems({ goToAddressEdit }: Props) {
     );
 
   return (
-    <EmptyCartMessage>
+    <S.EmptyCartMessage>
       <p>Não há itens no carrinho!</p>
-    </EmptyCartMessage>
+    </S.EmptyCartMessage>
   );
 }
