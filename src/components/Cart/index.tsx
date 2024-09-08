@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
-import { CartContainer, OverLay, SideBar } from "./styles";
+import { useState } from "react";
+
 import { close } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
 import hiddenBodyScroll from "../../utils/hiddenOverflow";
+
+import { CartContainer, OverLay, SideBar } from "./styles";
 import CartItems from "../../containers/CartItems";
-import { useState } from "react";
 import Checkout from "../Checkout";
 
 export default function Cart() {

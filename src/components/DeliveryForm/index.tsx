@@ -1,8 +1,11 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { Button, FormContainer, InputRow } from "../../styles";
 import InputGroup from "../InputGroup";
+import { setDelivery } from "../../store/reducers/delivery";
+import { RootReducer } from "../../store";
 
 type Props = {
   backtoCart: () => void;
@@ -10,14 +13,17 @@ type Props = {
 };
 
 export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
+  const dispatch = useDispatch();
+  const { delivery } = useSelector((state: RootReducer) => state.delivery);
+
   const form = useFormik({
     initialValues: {
-      name: "",
-      address: "",
-      city: "",
-      zipCode: "",
-      number: "",
-      complement: "",
+      name: delivery ? delivery.reciver : "",
+      address: delivery ? delivery.address.description : "",
+      city: delivery ? delivery.address.city : "",
+      zipCode: delivery ? delivery.address.zipCode : "",
+      number: delivery ? delivery.address.number : "",
+      complement: delivery ? delivery.address.complement : "",
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -32,10 +38,24 @@ export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
       zipCode: Yup.string()
         .min(9, "O campo precisa de ter pelo menos 9 caracteres")
         .required("O campo é obrigatório"),
-      number: Yup.string().required("O campo é obrigatório"),
+      number: Yup.number()
+        .min(2, "O campo precisa de ter pelo menos 2 caracteres")
+        .required("O campo é obrigatório"),
       complement: Yup.string(),
     }),
     onSubmit: () => {
+      dispatch(
+        setDelivery({
+          reciver: form.values.name,
+          address: {
+            city: form.values.city,
+            description: form.values.address,
+            number: Number(form.values.number),
+            complement: form.values.complement,
+            zipCode: form.values.zipCode,
+          },
+        })
+      );
       goToPayment();
     },
   });
@@ -92,8 +112,8 @@ export default function DeliveryForm({ backtoCart, goToPayment }: Props) {
           />
           <InputGroup
             onChange={form.handleChange}
-            value={form.values.number}
-            type="text"
+            value={String(form.values.number)}
+            type="number"
             id="number"
             name="number"
             $isInvalid={getError("number")}

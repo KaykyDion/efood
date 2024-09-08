@@ -1,15 +1,27 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Button, FormContainer } from "../../styles";
+import { RootReducer } from "../../store";
+import { clear, close } from "../../store/reducers/cart";
+import { getTotalPrice } from "../../utils/getTotalPrice";
+
+import { Button, FormContainer, InputRow } from "../../styles";
 import InputGroup from "../InputGroup";
-import { InputRow } from "../../styles";
+import { usePurchaseMutation } from "../../services/api";
+import { SuccessMessage } from "./styles";
 
 type Props = {
   backToAddressEdit: () => void;
+  backToCart: () => void;
 };
 
-export default function PaymentForm({ backToAddressEdit }: Props) {
+export default function PaymentForm({ backToAddressEdit, backToCart }: Props) {
+  const { items } = useSelector((state: RootReducer) => state.cart);
+  const { delivery } = useSelector((state: RootReducer) => state.delivery);
+  const dispatch = useDispatch();
+  const [purchase, { isLoading, data }] = usePurchaseMutation();
+
   const form = useFormik({
     initialValues: {
       cardName: "",
@@ -32,10 +44,29 @@ export default function PaymentForm({ backToAddressEdit }: Props) {
         .min(2, "O campo precisa de ter pelo menos 2 caracteres")
         .required("O campo é obrigatório"),
       expiresYear: Yup.string()
-        .min(2, "O campo precisa de ter pelo menos 2 caracteres")
+        .min(4, "O campo precisa de ter pelo menos 4 caracteres")
         .required("O campo é obrigatório"),
     }),
-    onSubmit: () => {},
+    onSubmit: () => {
+      purchase({
+        products: items.map((item) => {
+          return { id: item.id, price: item.preco };
+        }),
+        delivery,
+        payment: {
+          card: {
+            name: form.values.cardName,
+            number: form.values.cardNumber,
+            code: Number(form.values.cardCode),
+            expires: {
+              month: Number(form.values.expiresMonth),
+              year: Number(form.values.expiresYear),
+            },
+          },
+        },
+      });
+      dispatch(clear());
+    },
   });
 
   const getError = (fieldName: string) => {
@@ -46,9 +77,41 @@ export default function PaymentForm({ backToAddressEdit }: Props) {
     return hasError;
   };
 
+  if (data)
+    return (
+      <SuccessMessage>
+        <h2>Pedido realizado - {data.orderId}</h2>
+        <p>
+          Estamos felizes em informar que seu pedido já está em processo de
+          preparação e, em breve, será entregue no endereço fornecido.
+        </p>
+        <p>
+          Gostaríamos de ressaltar que nossos entregadores não estão autorizados
+          a realizar cobranças extras.
+        </p>
+        <p>
+          Lembre-se da importância de higienizar as mãos após o recebimento do
+          pedido, garantindo assim sua segurança e bem-estar durante a refeição.
+        </p>
+        <p>
+          Esperamos que desfrute de uma deliciosa e agradável experiência
+          gastronômica. Bom apetite!
+        </p>
+        <Button
+          onClick={() => {
+            backToCart();
+            dispatch(close());
+          }}
+          title="Clique aqui para concluir o pedido"
+        >
+          Concluir
+        </Button>
+      </SuccessMessage>
+    );
+
   return (
     <FormContainer>
-      <h2>Pagamento - Valor a pagar </h2>
+      <h2>Pagamento - Valor a pagar {getTotalPrice(items)}</h2>
       <form onSubmit={form.handleSubmit}>
         <InputGroup
           onChange={form.handleChange}
@@ -102,12 +165,16 @@ export default function PaymentForm({ backToAddressEdit }: Props) {
             id="expiresYear"
             name="expiresYear"
             labelText="Ano de vencimento"
-            mask="99"
+            mask="9999"
           />
         </InputRow>
 
-        <Button title="Clique para finalizar o pagamento" type="submit">
-          Finalizar pagamento
+        <Button
+          disabled={isLoading}
+          title="Clique para finalizar o pagamento"
+          type="submit"
+        >
+          {isLoading ? "Finalizando pagamento..." : "Finalizar pagamento"}
         </Button>
         <Button
           onClick={backToAddressEdit}

@@ -17,7 +17,10 @@ export default function Checkout({ backToCart }: Props) {
           goToPayment={() => setIsPaying(true)}
         />
       ) : (
-        <PaymentForm backToAddressEdit={() => setIsPaying(false)} />
+        <PaymentForm
+          backToCart={backToCart}
+          backToAddressEdit={() => setIsPaying(false)}
+        />
       )}
     </>
   );

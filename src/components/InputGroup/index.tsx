@@ -1,5 +1,6 @@
-import { Container } from "./styles";
 import InputMask from "react-input-mask";
+
+import { Container } from "./styles";
 
 export type Props = {
   labelText: string;
@@ -34,6 +35,7 @@ export default function InputGroup({
           mask={mask}
           id={id}
           type={type}
+          maskChar={null}
         />
       ) : (
         <input

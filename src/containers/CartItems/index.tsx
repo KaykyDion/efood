@@ -6,6 +6,7 @@ import formatPrice from "../../utils/formatPrice";
 import { remove } from "../../store/reducers/cart";
 import Product from "../../models/Product";
 import { Button } from "../../styles";
+import { getTotalPrice } from "../../utils/getTotalPrice";
 
 type Props = {
   goToAddressEdit: () => void;
@@ -17,10 +18,6 @@ export default function CartItems({ goToAddressEdit }: Props) {
 
   const removeProduct = (item: Product) => {
     dispatch(remove(item.id));
-  };
-
-  const getTotalPrice = () => {
-    return formatPrice(items.reduce((acc, item) => (acc += item.preco), 0));
   };
 
   if (items.length)
@@ -39,7 +36,7 @@ export default function CartItems({ goToAddressEdit }: Props) {
           ))}
         </ul>
         <p>
-          Valor total: <span>{getTotalPrice()}</span>
+          Valor total: <span>{getTotalPrice(items)}</span>
         </p>
         <Button onClick={goToAddressEdit}>Continuar com a entrega</Button>
       </>
