@@ -4,8 +4,11 @@ import { close } from "../../store/reducers/cart";
 import { RootReducer } from "../../store";
 import hiddenBodyScroll from "../../utils/hiddenOverflow";
 import CartItems from "../../containers/CartItems";
+import { useState } from "react";
+import Checkout from "../Checkout";
 
 export default function Cart() {
+  const [finishedCart, setFinishedCart] = useState(false);
   const { isOpen } = useSelector((state: RootReducer) => state.cart);
   const dispatch = useDispatch();
 
@@ -18,7 +21,11 @@ export default function Cart() {
   return (
     <CartContainer className={isOpen ? "is-open" : ""}>
       <SideBar>
-        <CartItems />
+        {!finishedCart ? (
+          <CartItems goToAddressEdit={() => setFinishedCart(true)} />
+        ) : (
+          <Checkout backToCart={() => setFinishedCart(false)} />
+        )}
       </SideBar>
       <OverLay onClick={closeCart}></OverLay>
     </CartContainer>

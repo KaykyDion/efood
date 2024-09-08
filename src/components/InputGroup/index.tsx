@@ -4,25 +4,45 @@ import InputMask from "react-input-mask";
 export type Props = {
   labelText: string;
   type: string;
-  inputSize?: string;
+  $inputSize?: string;
   id: string;
   mask?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent) => void;
+  name: string;
+  $isInvalid?: boolean;
 };
 
 export default function InputGroup({
   labelText,
-  inputSize,
+  $inputSize,
   type,
   id,
   mask,
+  value,
+  name,
+  onChange,
+  $isInvalid,
 }: Props) {
   return (
-    <Container inputSize={inputSize}>
+    <Container $isInvalid={$isInvalid} $inputSize={$inputSize}>
       <label htmlFor={id}>{labelText}</label>
       {mask ? (
-        <InputMask mask={mask} id={id} type={type} />
+        <InputMask
+          name={name}
+          onChange={onChange}
+          mask={mask}
+          id={id}
+          type={type}
+        />
       ) : (
-        <input id={id} type={type} />
+        <input
+          name={name}
+          onChange={onChange}
+          value={value}
+          id={id}
+          type={type}
+        />
       )}
     </Container>
   );

@@ -3,7 +3,10 @@ import { colors } from "../../styles";
 import { Props } from ".";
 
 export const Container = styled.div<
-  Omit<Props, "labelText" | "type" | "id" | "mask">
+  Omit<
+    Props,
+    "labelText" | "type" | "id" | "mask" | "onChange" | "value" | "name"
+  >
 >`
   display: flex;
   flex-direction: column;
@@ -21,9 +24,10 @@ export const Container = styled.div<
     height: 32px;
     background-color: ${colors.textSecondary};
     color: ${colors.black};
-    max-width: ${(props) => (props.inputSize ? props.inputSize : "100%")};
+    max-width: ${(props) => (props.$inputSize ? props.$inputSize : "100%")};
     width: 100%;
-    border: 1px solid ${colors.textSecondary};
+    border: 2px solid
+      ${(props) => (props.$isInvalid ? "#d11b17" : colors.textSecondary)};
     font-weight: bold;
     font-size: 14px;
   }

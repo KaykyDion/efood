@@ -7,7 +7,11 @@ import { remove } from "../../store/reducers/cart";
 import Product from "../../models/Product";
 import { Button } from "../../styles";
 
-export default function CartItems() {
+type Props = {
+  goToAddressEdit: () => void;
+};
+
+export default function CartItems({ goToAddressEdit }: Props) {
   const { items } = useSelector((state: RootReducer) => state.cart);
   const dispatch = useDispatch();
 
@@ -37,7 +41,7 @@ export default function CartItems() {
         <p>
           Valor total: <span>{getTotalPrice()}</span>
         </p>
-        <Button>Continuar com a entrega</Button>
+        <Button onClick={goToAddressEdit}>Continuar com a entrega</Button>
       </>
     );
 
