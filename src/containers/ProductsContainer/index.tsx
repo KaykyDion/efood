@@ -1,5 +1,4 @@
 import ProductCard from "../../components/ProductCard";
-import Product from "../../models/Product";
 import { Container } from "./styles";
 
 type Props = {
